@@ -2,6 +2,10 @@
 whatsapp_photos_to_word/data/input/
 whatsapp_photos_to_word/data/output/
 
+# WhatsApp Timeline Web - Data files
+whatsapp_timeline_web/data/input/
+whatsapp_timeline_web/data/output/
+
 # CSV to QR Code Generator - Generated files
 csv_to_qrcode_generator/input.csv
 csv_to_qrcode_generator/*_qr_codes/
