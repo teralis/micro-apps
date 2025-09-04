@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ company_name }} - {{ title }}</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Lato', 'Open Sans', 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #1a365d 0%, #2c5282 100%);
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .hero-section {
+            background: linear-gradient(rgba(26, 54, 93, 0.8), rgba(44, 82, 130, 0.8)), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 300"><defs><pattern id="wave" x="0" y="0" width="100" height="20" patternUnits="userSpaceOnUse"><path d="M0,10 Q25,0 50,10 T100,10 V20 H0 Z" fill="rgba(255,255,255,0.05)"/></pattern></defs><rect width="1000" height="300" fill="url(%23wave)"/></svg>');
+            background-size: cover;
+            background-attachment: fixed;
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            z-index: 2;
+            position: relative;
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            font-weight: 300;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+            animation: fadeInUp 1s ease-out 0.2s both;
+        }
+
+        .hero-tagline {
+            background: rgba(225, 99, 92, 0.9);
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            animation: fadeInUp 1s ease-out 0.4s both;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .year-nav {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1.5rem 0;
+            text-align: center;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .year-nav a {
+            display: inline-block;
+            margin: 0 0.8rem;
+            padding: 0.8rem 1.5rem;
+            background: #e1635c;
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .year-nav a:hover {
+            background: #c44238;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(225, 99, 92, 0.4);
+        }
+
+        .timeline-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        .year-section {
+            margin-bottom: 5rem;
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            transform: translateY(30px);
+            opacity: 0;
+            animation: slideInUp 0.8s ease-out forwards;
+        }
+
+        @keyframes slideInUp {
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .year-header {
+            background: linear-gradient(135deg, #e1635c 0%, #c44238 100%);
+            color: white;
+            padding: 3rem;
+            text-align: left;
+            position: relative;
+        }
+
+        .year-header::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 0;
+            height: 0;
+            border-left: 50px solid transparent;
+            border-top: 50px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .year-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+        }
+
+        .year-summary {
+            font-size: 1.3rem;
+            opacity: 0.95;
+            margin-bottom: 1rem;
+        }
+
+        .year-achievements {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 1rem 1.5rem;
+            border-radius: 10px;
+            margin-top: 1.5rem;
+        }
+
+        .achievement-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .achievement-badge {
+            background: rgba(255, 255, 255, 0.9);
+            color: #e1635c;
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .year-content {
+            padding: 3rem;
+        }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .project-card {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border-left: 4px solid #e1635c;
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .project-card img {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+        }
+
+        .project-info {
+            padding: 2rem;
+        }
+
+        .project-date {
+            color: #e1635c;
+            font-weight: 700;
+            margin-bottom: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+        }
+
+        .project-leader {
+            color: #1a365d;
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .project-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #1a365d;
+            margin-bottom: 1rem;
+            line-height: 1.3;
+        }
+
+        .project-description {
+            color: #4a5568;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .project-impact {
+            background: rgba(225, 99, 92, 0.1);
+            padding: 1rem;
+            border-radius: 8px;
+            border-left: 3px solid #e1635c;
+        }
+
+        .impact-label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #e1635c;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+
+        .impact-text {
+            color: #2d3748;
+            font-style: italic;
+            font-size: 0.95rem;
+        }
+
+        .capabilities {
+            background: linear-gradient(135deg, #1a365d 0%, #2c5282 100%);
+            color: white;
+            padding: 2.5rem;
+            border-radius: 15px;
+            margin-top: 3rem;
+        }
+
+        .capabilities h3 {
+            color: white;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+
+        .capability-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+        }
+
+        .capability-tag {
+            background: rgba(225, 99, 92, 0.9);
+            color: white;
+            padding: 0.6rem 1.2rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .metrics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .metric-item {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(225, 99, 92, 0.05);
+            border-radius: 15px;
+            border-top: 3px solid #e1635c;
+        }
+
+        .metric-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #e1635c;
+            margin-bottom: 0.5rem;
+        }
+
+        .metric-label {
+            color: #4a5568;
+            font-size: 0.95rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .cta-section {
+            background: linear-gradient(135deg, #e1635c 0%, #c44238 100%);
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+            margin-top: 4rem;
+        }
+
+        .cta-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .cta-title {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .cta-text {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: white;
+            color: #e1635c;
+            padding: 1rem 2.5rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .footer {
+            text-align: center;
+            padding: 3rem 0;
+            background: #1a365d;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .year-title {
+                font-size: 2.5rem;
+            }
+            
+            .project-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .year-nav a {
+                margin: 0.2rem;
+                padding: 0.6rem 1rem;
+                font-size: 0.85rem;
+            }
+
+            .metrics {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            cursor: pointer;
+        }
+
+        .lightbox img {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+        }
+
+        .close-lightbox {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="hero-section">
+        <div class="hero-content">
+            <h1 class="hero-title">{{ company_name }}</h1>
+            <p class="hero-subtitle">{{ tagline }}</p>
+            <div class="hero-tagline">{{ cta_text }}</div>
+        </div>
+    </div>
+
+    <div class="year-nav">
+        {% for year in years %}
+        <a href="#year-{{ year }}">{{ year }}</a>
+        {% endfor %}
+    </div>
+
+    <div class="timeline-container">
+        {% for year_data in timeline_data %}
+        <div class="year-section" id="year-{{ year_data.year }}">
+            <div class="year-header">
+                <div class="year-title">{{ year_data.year }}</div>
+                <div class="year-summary">{{ year_data.marketing_summary }}</div>
+                
+                <div class="year-achievements">
+                    <div class="achievement-list">
+                        {% for achievement in year_data.achievements %}
+                        <span class="achievement-badge">{{ achievement }}</span>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            
+            <div class="year-content">
+                <div class="project-grid">
+                    {% for project in year_data.projects %}
+                    <div class="project-card">
+                        <img src="{{ project.image }}" alt="{{ project.title }}" onclick="openLightbox('{{ project.image }}')">
+                        <div class="project-info">
+                            <div class="project-date">{{ project.date }}</div>
+                            <div class="project-leader">Project Lead: {{ project.leader }}</div>
+                            <div class="project-title">{{ project.title }}</div>
+                            <div class="project-description">{{ project.description }}</div>
+                            <div class="project-impact">
+                                <div class="impact-label">Impact & Results</div>
+                                <div class="impact-text">{{ project.impact }}</div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                
+                {% if year_data.capabilities %}
+                <div class="capabilities">
+                    <h3>Core Capabilities Demonstrated</h3>
+                    <div class="capability-tags">
+                        {% for capability in year_data.capabilities %}
+                        <span class="capability-tag">{{ capability }}</span>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endif %}
+                
+                <div class="metrics">
+                    <div class="metric-item">
+                        <div class="metric-number">{{ year_data.total_projects }}</div>
+                        <div class="metric-label">Projects Delivered</div>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-number">{{ year_data.total_milestones }}</div>
+                        <div class="metric-label">Major Milestones</div>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-number">{{ year_data.team_growth }}</div>
+                        <div class="metric-label">Team Growth</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="cta-section">
+        <div class="cta-content">
+            <h2 class="cta-title">Ready to Build the Future?</h2>
+            <p class="cta-text">Experience the difference that {{ years_experience }}+ years of marine engineering excellence makes.</p>
+            <a href="#contact" class="cta-button">Get in Touch</a>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>{{ company_name }} | Australian Marine Engineering Excellence | {{ generation_date }}</p>
+    </div>
+
+    <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+        <span class="close-lightbox">&times;</span>
+        <img id="lightbox-img" src="" alt="">
+    </div>
+
+    <script>
+        function openLightbox(imageSrc) {
+            document.getElementById('lightbox').style.display = 'block';
+            document.getElementById('lightbox-img').src = imageSrc;
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox').style.display = 'none';
+        }
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('.year-nav a').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            });
+        });
+
+        // Animate sections on scroll with stagger effect
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.style.animationDelay = '0s';
+                        entry.target.classList.add('animate');
+                    }, index * 100);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.year-section').forEach(section => {
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>
