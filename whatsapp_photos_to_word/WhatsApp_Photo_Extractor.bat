@@ -4,10 +4,11 @@ echo.
 echo Starting WhatsApp Photo Extractor...
 echo.
 
-REM Check if Python script exists
+REM Change to src directory and check if Python script exists
+cd /d "%~dp0\src"
 if not exist "whatsapp_photo_extractor.py" (
-    echo Error: whatsapp_photo_extractor.py not found!
-    echo Please make sure this batch file is in the same folder as the Python script.
+    echo Error: whatsapp_photo_extractor.py not found in src folder!
+    echo Please make sure the Python script is in the src directory.
     pause
     exit /b 1
 )

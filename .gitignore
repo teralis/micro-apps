@@ -1,0 +1,47 @@
+# WhatsApp Photos to Word - Data files
+whatsapp_photos_to_word/data/input/
+whatsapp_photos_to_word/data/output/
+
+# CSV to QR Code Generator - Generated files
+csv_to_qrcode_generator/input.csv
+csv_to_qrcode_generator/*_qr_codes/
+
+# Build and distribution files
+*/build/
+# Keep dist/ and exe for distribution
+# */dist/
+# */*.exe
+*/*.spec
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+pip-log.txt
+pip-delete-this-directory.txt
+.pytest_cache/
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Temporary files
+*.tmp
+*.temp
+~*
